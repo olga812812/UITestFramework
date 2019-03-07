@@ -25,6 +25,7 @@ public class TechPortRu extends BasePage{
 	By buttonNext = By.xpath("//span[contains(text(),'Продолжить')]");
 	By buttonDeliveryType= By.xpath("//label[@for='order_delivery_type_pickup']/descendant::span[@class='tcp-radio-big__indicator']");
 	By buttonPaymentType=By.xpath("//label[@for='order_payment_option_1']/descendant::span[@class='tcp-radio-big__indicator']");
+	By buttonApplyFilters = By.xpath("//button[@class='tcp-button tcp-button_eminence tcp-button_block tcp-button_s_s submit_button']");
 	
 	//titles	
 	By titleSearchResults = By.xpath("//h1[contains(text(),'Результаты поиска')]");
@@ -36,6 +37,13 @@ public class TechPortRu extends BasePage{
 	By menuIcon = By.xpath("//div[@class='tcp-burger tcp-burger_white']");
 	By categoryZooProducts=By.xpath("//a[@href='/katalog/products/zootovary']");
 	By subCategoryGruming = By.xpath("//a[@href='/katalog/products/zootovary/koshki/gruming']");
+	
+	//checkBoxes and others
+	By checkBoxProducer = By.cssSelector("[for='i_brand_1']");
+	By scrollMinPrice = By.xpath("//div[@class='noUi-handle noUi-handle-lower']");
+	By scrollMaxPrice = By.xpath("//div[@class='noUi-handle noUi-handle-upper']");
+	By loadIconAfterFiltering = By.xpath("//div[@class='tcp-preloader__content']/img[@alt='Загрузка...' and @class='tcp-preloader__element tcp-preloader__element_progress']");
+	
 	
 	
 	public TechPortRu(WebDriver driver) {
@@ -94,6 +102,22 @@ public class TechPortRu extends BasePage{
 	
 	public boolean isSubCategoryOpened(){
 		return isElementHere(titleGruming);
+	}
+	
+	public void filterProducers() {
+		clickElement(checkBoxProducer);	
+		waitOfInvisibilityOfElement(loadIconAfterFiltering);				
+	}
+	
+	public void filterPrice() {
+		
+		ClickElementAndSlideByOffset(scrollMinPrice, 30, 0);		
+		ClickElementAndSlideByOffset(scrollMaxPrice, -20, 0);	
+	}
+	
+	public void clickApplyFilters() {
+		waitOfVisibility(buttonApplyFilters);
+		clickElement(buttonApplyFilters);	
 	}
 
 }

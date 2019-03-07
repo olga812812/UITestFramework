@@ -25,4 +25,11 @@ public class TechportRuTests extends BaseTest {
 		assertTrue(page.isSubCategoryOpened());
 	}
 
+	@Test (dependsOnMethods="chooseProductCategoryInMenu")
+	public void filterProductsInCategory(){
+		page.filterProducers();
+		page.filterPrice();
+		page.clickApplyFilters();
+		
+	}
 }

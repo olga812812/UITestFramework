@@ -72,6 +72,12 @@ public  class BasePage {
 		waitG.until(ExpectedConditions.elementToBeClickable(element));
 	}
 	
+	public void waitOfInvisibilityOfElement(By locator) {
+		
+		WebDriverWait waitG = new WebDriverWait(driver, 20);	
+		waitG.until(ExpectedConditions.invisibilityOf(findElement(locator)));
+	}
+	
 	public WebElement findElement(By locator) {
 		return driver.findElement(locator);
 	}
@@ -92,6 +98,13 @@ public  class BasePage {
 		WebElement element = driver.findElement(locator);
 		Actions actions = new Actions(driver);
 		actions.moveToElement(element).click();
+		actions.perform();
+	}
+	
+	public void ClickElementAndSlideByOffset(By locator, int offSetX, int ossSetY){
+		WebElement element = driver.findElement(locator);	
+		Actions actions = new Actions(driver);
+		actions.dragAndDropBy(element, offSetX, ossSetY);
 		actions.perform();
 	}
 	
